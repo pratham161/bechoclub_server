@@ -23,6 +23,10 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    isAdharVerified:{
+        type: Boolean,
+        default: false
+    },
 }, {timestamsps: true});
 
 const User = mongoose.model("user", userSchema);

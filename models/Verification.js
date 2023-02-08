@@ -9,7 +9,7 @@ const verificationSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  expiresAt: { type: Date, expires: "10m", default: Date.now },
+  expiresAt: { type: Date, expires: "600s", default: Date.now },
 });
 
 const Verification = mongoose.model("verification",verificationSchema);

@@ -93,7 +93,7 @@ router.post("/signup",async (req,res)=>{
     
 });
 
-router.put("/verify", async (req,res)=>{
+router.post("/verify", async (req,res)=>{
     try {
         let user = await Verification.findOne({ otp: req.body.otp });      
         if (!user) {
@@ -126,7 +126,7 @@ router.put("/set-password", async (req,res)=>{
         { new: true }
       );
       const authToken = jwt.sign(
-        { id: updatedUser._id, isverified: updatedUser.isverified },
+        { id: updatedUser._id, isverified: updatedUser.isverified, isAdharVerified: updatedUser.isAdharVerified },
         process.env.JWT_SECRETE
       );
       await Verification.findOneAndDelete({ otp: req.body.otp });
@@ -149,7 +149,11 @@ router.post("/login", async (req,res)=>{
      const password = bytes.toString(crypto.enc.Utf8);
      if (req.body.password === password) {
       const authToken = jwt.sign(
-        { id: user._id, isverified: user.isverified },
+        {
+          id: user._id,
+          isverified: user.isverified,
+          isAdharVerified: user.isAdharVerified,
+        },
         process.env.JWT_SECRETE
       );
       return res.status(200).json({token:authToken});
