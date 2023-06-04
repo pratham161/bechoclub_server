@@ -24,10 +24,12 @@ const connectDB = async () => {
 const authRoute = require("./routes/authentication");
 const userRoute = require("./routes/user");
 const addresRoute = require("./routes/addres");
+const listingRoute = require("./routes/listing");
 
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/addres", addresRoute);
+app.use("/listings", listingRoute);
 connectDB().then(()=>{
     app.listen(4000,()=>console.log("server is running"));  
 });
